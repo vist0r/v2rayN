@@ -18,6 +18,7 @@ namespace v2rayN.Forms
     public partial class MainForm : BaseForm
     {
         private V2rayHandler v2rayHandler;
+        private AutoSwitchHandler autoSwitchHandler;
         private List<int> lvSelecteds = new List<int>();
         private StatisticsHandler statistics = null;
         private string MsgFilter = string.Empty;
@@ -51,6 +52,8 @@ namespace v2rayN.Forms
             MainFormHandler.Instance.BackupGuiNConfig(config, true);
             v2rayHandler = new V2rayHandler();
             v2rayHandler.ProcessEvent += v2rayHandler_ProcessEvent;
+            autoSwitchHandler = new AutoSwitchHandler(ref config);
+            autoSwitchHandler.ProcessEvent += v2rayHandler_ProcessEvent;
 
             if (config.enableStatistics)
             {
@@ -441,6 +444,7 @@ namespace v2rayN.Forms
                 ClearMsg();
             }
             v2rayHandler.LoadV2ray(config);
+            autoSwitchHandler.Restart();
             Global.reloadV2ray = false;
             ConfigHandler.SaveConfig(ref config, false);
             statistics?.SaveToFile();

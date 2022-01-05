@@ -149,6 +149,7 @@
     <Compile Include="Forms\ServerTransportControl.Designer.cs">
       <DependentUpon>ServerTransportControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Handler\AutoSwitchHandler.cs" />
     <Compile Include="Handler\ShareHandler.cs" />
     <Compile Include="Handler\UpdateHandle.cs" />
     <Compile Include="Mode\ComboItem.cs" />
