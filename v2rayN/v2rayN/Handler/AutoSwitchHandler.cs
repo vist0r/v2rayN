@@ -26,7 +26,7 @@ namespace v2rayN.Handler
                 {
                     SpeedtestHandler status = new SpeedtestHandler(ref _config);
                     string result = status.RunAvailabilityCheck() + "ms";
-                    ShowMsg(false, x.ToString());
+                    ShowMsg(false, result);
                     x++;
                     Thread.Sleep(1000);
                 }
