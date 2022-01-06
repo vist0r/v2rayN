@@ -28,12 +28,12 @@ namespace v2rayN.Forms
         public MainForm()
         {
             InitializeComponent();
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             this.ShowInTaskbar = false;
             this.WindowState = FormWindowState.Minimized;
             HideForm();
             this.Text = Utils.GetVersion();
             Global.processJob = new Job();
-
             Application.ApplicationExit += (sender, args) =>
             {
                 MyAppExit(false);
@@ -53,6 +53,7 @@ namespace v2rayN.Forms
             v2rayHandler = new V2rayHandler();
             v2rayHandler.ProcessEvent += v2rayHandler_ProcessEvent;
             autoSwitchHandler = new AutoSwitchHandler(ref config);
+            autoSwitchHandler.SetServerCallback = SetDefaultServer;
             autoSwitchHandler.ProcessEvent += v2rayHandler_ProcessEvent;
 
             if (config.enableStatistics)
